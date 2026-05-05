@@ -22,6 +22,10 @@
       "rev": "78c638293f0ea6a2245eca46e9933ee271792d7e",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
+    "csvview.nvim": {
+      "rev": "5c22774c3ecc7f8883af5d143b366e45b1f0875d",
+      "src": "https://github.com/hat0uma/csvview.nvim"
+    },
     "diffview.nvim": {
       "rev": "fca8421a90ddeb427dbe769f369db99fae2b193b",
       "src": "https://github.com/dlyongemallo/diffview.nvim"

@@ -36,6 +36,7 @@ vim.pack.add({
     { src = "https://github.com/nvim-mini/mini.pairs" },
     { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
     { src = "https://github.com/chomosuke/typst-preview.nvim" },
+    { src = "https://github.com/hat0uma/csvview.nvim" },
 
     -- Misc
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },

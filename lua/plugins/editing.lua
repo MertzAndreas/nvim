@@ -4,7 +4,10 @@ require("nvim-ts-autotag").setup()
 require("mini.surround").setup()
 require("mini.ai").setup()
 require("mini.pairs").setup()
-require("typst-preview").setup({})
+require("typst-preview").setup({
+  -- Hack for dms.
+  open_cmd = 'dms open %s > /dev/null 2>&1',
+})
 keys({
   {
     "s",

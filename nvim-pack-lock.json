@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "base16-nvim": {
-      "rev": "23e5128eb5f629c29532c24a1e733cbe019f05bb",
-      "src": "https://github.com/RRethy/base16-nvim"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -40,6 +36,10 @@
     "mini.ai": {
       "rev": "a783ce6e1a5b3bc90519f20b51f4a5f6702734af",
       "src": "https://github.com/nvim-mini/mini.ai"
+    },
+    "mini.base16": {
+      "rev": "f2b4697eb678c396052f7fd3599c142292ad94c3",
+      "src": "https://github.com/nvim-mini/mini.base16"
     },
     "mini.diff": {
       "rev": "117c301374ab8546891e2b34f63885ea83527432",

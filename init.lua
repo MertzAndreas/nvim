@@ -2,21 +2,10 @@ vim.cmd.packadd "nvim.undotree"
 
 vim.pack.add({
   -- Git
-  { src = "https://github.com/dlyongemallo/diffview.nvim" },
-  { src = "https://github.com/nvim-mini/mini.diff" },
-  { src = "https://github.com/nvim-mini/mini-git" },
-
-  -- Theme
-  { src = "https://github.com/nvim-mini/mini.base16" },
+  { src = "https://github.com/dlyongemallo/diffview.nvim",     load = false },
 
   -- UI
-  { src = "https://github.com/folke/todo-comments.nvim" },
   { src = "https://github.com/folke/snacks.nvim" },
-  { src = "https://github.com/hat0uma/csvview.nvim" },
-  { src = "https://github.com/folke/which-key.nvim" },
-  { src = "https://github.com/nvim-lualine/lualine.nvim" },
-  { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-  { src = "https://github.com/nvim-mini/mini.icons" },
 
   -- LSP
   { src = "https://github.com/neovim/nvim-lspconfig" },
@@ -25,28 +14,15 @@ vim.pack.add({
 
   -- Editing
   { src = "https://github.com/folke/flash.nvim" },
-  { src = "https://github.com/saghen/blink.cmp",                         version = vim.version.range "*" },
+  { src = "https://github.com/saghen/blink.cmp",               version = vim.version.range "*" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
-  { src = "https://github.com/nvim-mini/mini.surround" },
-  { src = "https://github.com/nvim-mini/mini.ai" },
-  { src = "https://github.com/nvim-mini/mini.pairs" },
-  { src = "https://github.com/folke/persistence.nvim" },
-  { src = "https://github.com/stevearc/quicker.nvim" },
-  { src = 'https://github.com/nvim-mini/mini.completion' },
-  { src = 'https://github.com/nvim-mini/mini.icons' },
-  { src = 'https://github.com/nvim-mini/mini.snippets' },
-
+  { src = "https://github.com/hat0uma/csvview.nvim" },
   -- Misc
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/nvim-mini/mini.nvim" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
 
-require('mini.completion').setup()
-require('mini.snippets').setup()
-require('mini.icons').setup()
-
-MiniIcons.tweak_lsp_kind()
 require "options"
 require "keymaps"
 require "autocmds"

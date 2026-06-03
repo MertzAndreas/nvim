@@ -32,3 +32,4 @@ vim.o.grepformat = "%f:%l:%c:%m"
 vim.o.grepprg = "rg --vimgrep"
 
 vim.o.wrap = false
+vim.o.spelllang = "en_us"

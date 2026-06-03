@@ -1,44 +1,8 @@
 local keys = require("utils").keys
 
 keys({
-    {
-        "<leader>R",
-        function()
-            local session = vim.fn.stdpath "state" .. "/restart_session.vim"
-            vim.cmd("mksession! " .. vim.fn.fnameescape(session))
-            vim.cmd("restart source " .. vim.fn.fnameescape(session))
-        end,
-        desc = "Restart Neovim",
-    },
-    -- Motion
-    {
-        "j",
-        "v:count == 0 ? 'gj' : 'j'",
-        desc = "Down",
-        mode = { "n", "x" },
-        expr = true,
-        silent = true,
-    },
-    {
-        "k",
-        "v:count == 0 ? 'gk' : 'k'",
-        desc = "Up",
-        mode = { "n", "x" },
-        expr = true,
-        silent = true,
-    },
-    {
-        "gl",
-        "$",
-        desc = "Go to end of line",
-        mode = { "n", "v" },
-    },
-    {
-        "gh",
-        "^",
-        desc = "Go to start of line",
-        mode = { "n", "v" },
-    },
+    desc = "Go to end of line",
+  },
 
     -- Windows
     {

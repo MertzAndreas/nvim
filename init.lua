@@ -31,11 +31,22 @@ vim.pack.add({
   { src = "https://github.com/nvim-mini/mini.ai" },
   { src = "https://github.com/nvim-mini/mini.pairs" },
   { src = "https://github.com/folke/persistence.nvim" },
+  { src = "https://github.com/stevearc/quicker.nvim" },
+  { src = 'https://github.com/nvim-mini/mini.completion' },
+  { src = 'https://github.com/nvim-mini/mini.icons' },
+  { src = 'https://github.com/nvim-mini/mini.snippets' },
 
   -- Misc
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/nvim-mini/mini.nvim" },
 })
 
+
+require('mini.completion').setup()
+require('mini.snippets').setup()
+require('mini.icons').setup()
+
+MiniIcons.tweak_lsp_kind()
 require "options"
 require "keymaps"
 require "autocmds"

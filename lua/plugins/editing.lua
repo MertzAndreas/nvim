@@ -3,6 +3,7 @@ require("nvim-ts-autotag").setup()
 require("mini.surround").setup()
 require("mini.ai").setup()
 require("mini.pairs").setup()
+require('mini.move').setup()
 
 keys({
   {
@@ -21,31 +22,6 @@ keys({
     desc = "Flash Treesitter",
     mode = { "n", "x", "o" },
   },
-})
-
-require("csvview").setup({
-  keymaps = {
-    -- Text objects for selecting fields
-    textobject_field_inner = { "if", mode = { "o", "x" } },
-    textobject_field_outer = { "af", mode = { "o", "x" } },
-    jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
-    jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
-    jump_next_row = { "<Enter>", mode = { "n", "v" } },
-    jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
-  }
-})
-
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "csv",
-  callback = function(args)
-    require("csvview").enable(args.buf, {
-      view = {
-        display_mode = "border",
-        header_lnum = 1,
-      }
-    })
-  end
 })
 
 vim.api.nvim_create_autocmd("BufReadCmd", {
@@ -78,10 +54,3 @@ vim.api.nvim_create_autocmd("BufReadCmd", {
     vim.fn.delete(tmp_csv)
   end,
 })
-
-
-require "persistence".setup()
-vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end)
-vim.keymap.set("n", "<leader>qS", function() require("persistence").select() end)
-vim.keymap.set("n", "<leader>ql", function() require("persistence").load({ last = true }) end)
-vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end)

@@ -6,32 +6,6 @@ require("blink.cmp").setup({
   fuzzy = { implementation = "prefer_rust" },
   appearance = {
     nerd_font_variant = "mono",
-    kind_icons = {
-      Text = "󰉿",
-      Method = "󰊕",
-      Function = "󰊕",
-      Constructor = "󰒓",
-      Field = "󰜢",
-      Variable = "󰆦",
-      Property = "󰖷",
-      Class = "󱡠",
-      Interface = "󱡠",
-      Struct = "󱡠",
-      Module = "󰅩",
-      Value = "󰦨",
-      Enum = "󰦨",
-      EnumMember = "󰦨",
-      Keyword = "󰻾",
-      Constant = "󰏿",
-      Snippet = "󱄽",
-      Color = "󰏘",
-      File = "󰈔",
-      Reference = "󰬲",
-      Folder = "󰉋",
-      Event = "󱐋",
-      Operator = "󰪚",
-      TypeParameter = "󰬛",
-    },
   },
 })
 
@@ -49,4 +23,5 @@ require("conform").setup({
   },
 })
 
-vim.lsp.enable({ "rust_analyzer", "lua_ls", "roslyn_ls", "vtsls", "tailwindcss", "clangd", "tinymist", "basedpyright" })
+vim.lsp.enable({ "rust_analyzer", "lua_ls", "roslyn_ls", "vtsls", "tailwindcss", "clangd", "tinymist", "basedpyright",
+  "bashls" })

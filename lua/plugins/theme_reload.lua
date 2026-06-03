@@ -1,8 +1,7 @@
 local M = {}
 
-local function reload_theme()
-  local generated = vim.fn.stdpath "config" .. "/lua/plugins/dankcolors.lua"
-  package.loaded["base16-colorscheme"] = nil
+local function apply_theme()
+  local generated = vim.fn.stdpath("config") .. "/lua/plugins/dankcolors.lua"
 
   local ok, spec = pcall(dofile, generated)
   if not ok then
@@ -10,24 +9,47 @@ local function reload_theme()
     return
   end
 
-  local config_fn = spec and spec[1] and spec[1].config
-  if type(config_fn) == "function" then
-    pcall(config_fn)
+  if type(spec) ~= "table" or type(spec) ~= "table" then
+    vim.notify("theme reload failed: invalid palette format", vim.log.levels.ERROR)
+    return
+  end
+
+  local ok_setup, err = pcall(function()
+    require("mini.base16").setup({
+      palette = spec,
+    })
+  end)
+
+  if not ok_setup then
+    vim.notify("mini.base16 setup failed: " .. err, vim.log.levels.ERROR)
   end
 end
 
 function M.setup()
-  reload_theme()
+  apply_theme()
 
   if _G._matugen_watcher then
     return
   end
 
   local uv = vim.uv or vim.loop
-  local generated = vim.fn.stdpath "config" .. "/lua/plugins/dankcolors.lua"
+  local generated = vim.fn.stdpath("config") .. "/lua/plugins/dankcolors.lua"
 
-  _G._matugen_watcher = uv.new_fs_event()
-  _G._matugen_watcher:start(generated, {}, vim.schedule_wrap(reload_theme))
+  local watcher = uv.new_fs_event()
+  _G._matugen_watcher = watcher
+  if not watcher then
+    vim.notify("fs_event watcher not available", vim.log.levels.ERROR)
+    return
+  end
+
+  watcher:start(
+    generated,
+    {},
+    vim.schedule_wrap(function()
+      apply_theme()
+      print("Theme reloaded")
+    end)
+  )
 end
 
 return M

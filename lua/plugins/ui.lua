@@ -2,6 +2,58 @@ require("vim._core.ui2").enable()
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 
+require("mini.input").setup()
+require("mini.notify").setup()
+
+require("mini.indentscope").setup({
+  symbol = '│',
+  draw = {
+    delay = 0,
+    animation = require("mini.indentscope").gen_animation.quadratic(
+      {
+        easing = 'out',
+        duration = 100,
+        unit = 'total'
+      })
+  },
+  options = {
+    indent_at_cursor = false
+  }
+})
+
+require("mini.files").setup()
+local show_dotfiles = true
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesBufferCreate",
+  callback = function(args)
+    vim.keymap.set("n", "<M-h>", function()
+      show_dotfiles = not show_dotfiles
+      MiniFiles.refresh({
+        content = {
+          filter = show_dotfiles
+              and function() return true end
+              or function(e) return not vim.startswith(e.name, ".") end
+        }
+      })
+    end, { buffer = args.data.buf_id })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "minifiles",
+  callback = function()
+    vim.keymap.set("n", "<C-e>", function()
+      local state = require("mini.files").get_explorer_state()
+      local dir = state and state.windows and state.windows[#state.windows].path
+
+      vim.fn.jobstart({ "nautilus", dir }, { detach = true })
+    end, { buffer = true })
+  end,
+})
+
+
+vim.keymap.set("n", "<leader><tab>", MiniFiles.open, { desc = "File Explorer" })
+
 local miniclue = require('mini.clue')
 miniclue.setup({
   triggers = {
@@ -39,7 +91,6 @@ miniclue.setup({
   },
   window = {
     config = { width = "auto", anchor = "SE", row = 'auto', col = 'auto' },
-
     delay = 300,
   },
 
@@ -67,7 +118,7 @@ require "mini.statusline".setup({
       local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
       local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
       local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-      local location      = MiniStatusline.section_location({ trunc_width = 75 })
+      local location      = '%p%%'
       local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
       return MiniStatusline.combine_groups({
@@ -82,4 +133,3 @@ require "mini.statusline".setup({
     end
   }
 })
-require "plugins.snacks"

@@ -1,25 +1,89 @@
-local keys = require("utils").keys
 require("nvim-ts-autotag").setup()
 require("mini.surround").setup()
 require("mini.ai").setup()
 require("mini.pairs").setup()
-require('mini.move').setup()
+require("mini.move").setup()
+require("mini.jump2d").setup()
 
-keys({
-  {
-    "s",
-    function()
-      require("flash").jump()
-    end,
-    desc = "Flash",
-    mode = { "n", "x", "o" },
+local pick = require("mini.pick")
+local extra = require("mini.extra")
+local pick_show_hidden = false
+
+pick.setup({
+  mappings = {
+    toggle_hidden = {
+      char = "<M-h>",
+      func = function()
+        pick_show_hidden = not pick_show_hidden
+        local cmd = pick_show_hidden
+            and { "fd", "--type", "f", "--hidden", "--no-ignore" }
+            or { "fd", "--type", "f" }
+        MiniPick.set_picker_items_from_cli(cmd)
+      end,
+    },
   },
-  {
-    "S",
-    function()
-      require("flash").treesitter()
+  window = {
+    config = function()
+      local height, width, starts, ends
+      local win_width = vim.o.columns
+      local win_height = vim.o.lines
+
+      if win_height <= 25 then
+        height = math.min(win_height, 40)
+        width = win_width
+        starts = 1
+        ends = win_height
+      else
+        width = math.floor(win_width * 0.5)   -- 50%
+        height = math.floor(win_height * 0.3) -- 30%
+        starts = math.floor((win_width - width) / 2)
+        -- center prompt: height * (50% + 30%)
+        -- center window: height * [50% + (30% / 2)]
+        ends = math.floor(win_height * 0.65)
+      end
+
+      return {
+        col = starts,
+        row = ends,
+        height = height,
+        width = width,
+        style = 'minimal',
+        border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+      }
     end,
-    desc = "Flash Treesitter",
-    mode = { "n", "x", "o" },
-  },
+  }
 })
+
+local map = vim.keymap.set
+local bi = pick.builtin
+local ei = extra.pickers
+
+map("n", "<leader><space>", bi.files, { desc = "Find Files" })
+map("n", "<leader>ff", bi.files, { desc = "Find Files" })
+map("n", "<leader>fc", function() bi.files({ tool = "fd", cwd = vim.fn.stdpath("config") }) end,
+  { desc = "Find Config File" })
+map("n", "<leader>fg", function() bi.files({ tool = "git" }) end, { desc = "Git Files" })
+map("n", "<leader>fr", function() ei.oldfiles() end, { desc = "Recent Files" })
+map("n", "<leader>sg", function() bi.grep_live() end, { desc = "Grep" })
+map("n", "<leader>sr", function() pick.registry.resume() end, { desc = "Resume Picker" })
+map("n", "<leader>sb", function() ei.buf_lines({ scope = "current" }) end, { desc = "Buffer Lines" })
+map("n", "<leader>:", function() ei.history({ scope = ":" }) end, { desc = "Command History" })
+map("n", "<leader>s/", function() ei.history({ scope = "/" }) end, { desc = "Search History" })
+map("n", "<leader>sq", function() ei.list({ scope = "quickfix" }) end, { desc = "Quickfix List" })
+map("n", "<leader>sm", function() ei.marks() end, { desc = "Marks" })
+map("n", "<leader>sj", function() ei.list({ scope = "jump" }) end, { desc = "Jumps" })
+map("n", '<leader>s"', function() ei.registers() end, { desc = "Registers" })
+map("n", "grd", function() ei.lsp({ scope = "definition" }) end, { desc = "Goto Definition" })
+map("n", "grD", function() ei.lsp({ scope = "declaration" }) end, { desc = "Goto Declaration" })
+map("n", "grr", function() ei.lsp({ scope = "references" }) end, { desc = "References" })
+map("n", "gri", function() ei.lsp({ scope = "implementation" }) end, { desc = "Implementation" })
+map("n", "gy", function() ei.lsp({ scope = "type_definition" }) end, { desc = "Type Definition" })
+map("n", "<leader>ss", function() ei.lsp({ scope = "document_symbol" }) end, { desc = "LSP Symbols" })
+map("n", "<leader>sS", function() ei.lsp({ scope = "workspace_symbol" }) end, { desc = "Workspace Symbols" })
+map("n", "<leader>sd", function() ei.diagnostic({ scope = "current" }) end, { desc = "Diagnostics" })
+map("n", "<leader>sD", function() ei.diagnostic({ scope = "all" }) end, { desc = "Workspace Diagnostics" })
+map("n", "<leader>gb", function() ei.git_branches() end, { desc = "Git Branches" })
+map("n", "<leader>si", function() ei.colorschemes() end, { desc = "Colorschemes" })
+map("n", "<leader>sk", function() ei.keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>sa", function() ei.autocommands() end, { desc = "Autocmds" })
+map("n", "<leader>sC", function() bi.cli() end, { desc = "Commands" })

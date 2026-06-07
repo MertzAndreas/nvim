@@ -1,7 +1,7 @@
 local M = {}
 
 local function apply_theme()
-  local generated = vim.fn.stdpath("config") .. "/lua/plugins/dankcolors.lua"
+  local generated = vim.fn.stdpath("config") .. "/lua/plugins/colors.lua"
 
   local ok, spec = pcall(dofile, generated)
   if not ok then
@@ -33,7 +33,7 @@ function M.setup()
   end
 
   local uv = vim.uv or vim.loop
-  local generated = vim.fn.stdpath("config") .. "/lua/plugins/dankcolors.lua"
+  local generated = vim.fn.stdpath("config") .. "/lua/plugins/colors.lua"
 
   local watcher = uv.new_fs_event()
   _G._matugen_watcher = watcher

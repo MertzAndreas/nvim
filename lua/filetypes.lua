@@ -1,5 +1,5 @@
 vim.filetype.add({
-  extension = {
-    parquet = "parquet",
-  },
+    extension = {
+        parquet = "parquet",
+    },
 })

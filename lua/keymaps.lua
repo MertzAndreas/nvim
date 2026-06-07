@@ -2,9 +2,9 @@ local map = vim.keymap.set
 
 -- Restart Neovim
 map("n", "<leader>R", function()
-  local session = vim.fn.stdpath("state") .. "/restart_session.vim"
-  vim.cmd("mksession! " .. vim.fn.fnameescape(session))
-  vim.cmd("restart source " .. vim.fn.fnameescape(session))
+    local session = vim.fn.stdpath "state" .. "/restart_session.vim"
+    vim.cmd("mksession! " .. vim.fn.fnameescape(session))
+    vim.cmd("restart source " .. vim.fn.fnameescape(session))
 end, { desc = "Restart Neovim" })
 
 -- Clear search highlight
@@ -12,11 +12,11 @@ map("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Clear selection" })
 
 -- Motion: better j/k (screen lines)
 map({ "n", "x" }, "j", function()
-  return vim.v.count == 0 and "gj" or "j"
+    return vim.v.count == 0 and "gj" or "j"
 end, { expr = true, silent = true, desc = "Down" })
 
 map({ "n", "x" }, "k", function()
-  return vim.v.count == 0 and "gk" or "k"
+    return vim.v.count == 0 and "gk" or "k"
 end, { expr = true, silent = true, desc = "Up" })
 
 map({ "n", "v" }, "H", "^", { desc = "Start of line" })

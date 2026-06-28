@@ -33,3 +33,9 @@ vim.o.grepprg = "rg --vimgrep"
 
 vim.o.wrap = false
 vim.o.spelllang = "en_us"
+
+vim.o.foldmethod = "indent"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+
+vim.opt.statuscolumn = "%s%=%{v:relnum?v:relnum:v:lnum}  "

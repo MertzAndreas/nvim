@@ -25,6 +25,8 @@ require("diffview").setup({
     },
 })
 
+vim.opt.fillchars:append({ diff = "╱" })
+
 vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewToggle<cr>", {
     desc = "Diffview: Toggle",
 })

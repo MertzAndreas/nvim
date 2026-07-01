@@ -38,3 +38,4 @@ map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
 -- Plugins / commands
 map("n", "<leader>S", "<cmd>lua vim.pack.update()<cr>", { desc = "Package Sync" })
 map("n", "<leader>U", "<cmd>Undotree<cr>", { desc = "Undotree" })
+map("n", "<esc>", "<cmd>noh<cr>", { desc = "Clear search highlight" })

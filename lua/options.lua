@@ -20,7 +20,7 @@ vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.undolevels = 10000
 
-vim.o.winborder = "rounded"
+vim.o.winborder = "single"
 
 vim.o.scrolloff = 8
 vim.o.cursorline = true

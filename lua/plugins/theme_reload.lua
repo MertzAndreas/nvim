@@ -43,6 +43,12 @@ local function apply_diff_highlights(spec)
         DiffviewDiffAddAsDelete = { bg = colors.delete },
 
         WinSeparator = { fg = spec.base02 },
+
+        FloatBorder = { fg = spec.base02 },
+        FloatTitle = { fg = spec.base03 },
+        BlinkCmpMenuBorder = { fg = spec.base02 },
+        BlinkCmpDocBorder = { fg = spec.base02 },
+        BlinkCmpSignatureHelpBorder = { fg = spec.base02 },
     }
 
     for group, opts in pairs(highlights) do

@@ -36,12 +36,14 @@ require("conform").setup({
     },
     formatters_by_ft = {
         lua = { "stylua" },
+        rust = { "rustfmt" },
     },
 })
 
 vim.lsp.enable({
     "rust_analyzer",
     "lua_ls",
+    "nixd",
     "roslyn_ls",
     "vtsls",
     "tailwindcss",

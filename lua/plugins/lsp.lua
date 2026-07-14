@@ -7,6 +7,22 @@ require("blink.cmp").setup({
     appearance = {
         nerd_font_variant = "mono",
     },
+    completion = {
+        documentation = {
+            auto_show = true,
+        },
+        menu = {
+            draw = {
+                padding = 2,
+                gap = 2,
+                columns = {
+                    { "label", "label_description" },
+                    { "kind_icon" },
+                    { "kind", gap = 3 },
+                },
+            },
+        },
+    },
 })
 
 vim.lsp.config("*", {

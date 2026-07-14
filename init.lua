@@ -16,8 +16,8 @@ vim.pack.add({
     -- Misc
     { src = "https://github.com/nvim-mini/mini.nvim" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/ibhagwan/fzf-lua" },
 })
-
 require "options"
 require "keymaps"
 require "autocmds"

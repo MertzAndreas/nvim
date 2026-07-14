@@ -49,6 +49,8 @@ local function apply_diff_highlights(spec)
         BlinkCmpMenuBorder = { fg = spec.base02 },
         BlinkCmpDocBorder = { fg = spec.base02 },
         BlinkCmpSignatureHelpBorder = { fg = spec.base02 },
+        FzfLuaBorder = { fg = spec.base02 },
+        FzfLuaTitle = { fg = spec.base00, bg = spec.base08, bold = true },
     }
 
     for group, opts in pairs(highlights) do
